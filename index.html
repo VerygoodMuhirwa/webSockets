@@ -6,16 +6,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Socket.IO Example</title>
     <script src="/socket.io/socket.io.js"></script>
+    <link rel="stylesheet" href="style.css">
   </head>
   <body>
-    <h1>Socket.io Example</h1>
+    <div class="container">
+    <ul id="message-list"></ul>
+</div>
+
 
     <form id="message-form">
-      <input type="text" id="message-input">
-      <button type="submit">Send</button>
+<input type="text" name="message" id="message-input">
+        <button type="submit" class="send">Send</button>
     </form>
-    <ul id="message-list"></ul>
-
     <script>
       // connect to the server via websocket
       const socket = io()
@@ -31,8 +33,22 @@
       // handle incoming messages from the server
       socket.on('message', (message) => {
         const li = document.createElement('li')
+        //stylings
+        li.style.backgroundColor=' #006aff',
+        li.style.width='fit-content'
+        li.style.margin='1em'
+        li.style.listStyle='none'
+        li.style.color='white'
+        li.style.height='fit-content'
+        li.style.borderRadius="10px"
+        li.style.maxWidth='15em'
+        li.style.padding='1em'
+        li.style.paddingRight='1em'
         li.innerHTML = message
-        document.getElementById('message-list').appendChild(li)
+        
+       const messageList= document.getElementById('message-list').appendChild(li)
+        document.getElementsByClassName('container')[0].appendChild(messageList)
+
       })
     </script>
   </body>
